@@ -3,43 +3,55 @@ package com.amandeep.tictactoe;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Board extends AppCompatActivity implements View.OnClickListener {
-    String turn;
-    String winner=null;
 
-    ImageView[] imageViews=new ImageView[9];
+    int cross=R.drawable.mu;
+    boolean[] BoxPosition={true,true,true,true,true,true,true,true,true};
+    ImageView first,second,third,fourth,fifth,sixth,seventh,eighth,ninth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
-        imageViews[0]=findViewById(R.id.first);
-        imageViews[1]=findViewById(R.id.second);
-        imageViews[2]=findViewById(R.id.third);
-        imageViews[3]=findViewById(R.id.fourth);
-        imageViews[4]=findViewById(R.id.fifth);
-        imageViews[5]=findViewById(R.id.sixth);
-        imageViews[6]=findViewById(R.id.seven);
-        imageViews[7]=findViewById(R.id.eight);
-        imageViews[8]=findViewById(R.id.nine);
-
-        imageViews[0].setOnClickListener(this);
-
-
-
-
-
-
-
-
-
+        first=findViewById(R.id.first);
+        second=findViewById(R.id.second);
+        third=findViewById(R.id.third);
+        fourth=findViewById(R.id.fourth);
+        fifth=findViewById(R.id.fifth);
+        sixth=findViewById(R.id.sixth);
+        seventh=findViewById(R.id.seven);
+        eighth=findViewById(R.id.eight);
+        ninth=findViewById(R.id.nine);
+        first.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        int id=view.getId();
+        ImageView img=(ImageView) view;
+        if(id==R.id.first)
+        {
+           if(isBoxSelectAble(0))
+           {
+            BoxPosition[0]=false;
+            img.setImageResource(R.drawable.mu);
+           }
+           else {
+               Toast.makeText(this,"Choose AnotherBox",Toast.LENGTH_SHORT).show();
+           }
+        }
+    }
 
+    boolean isBoxSelectAble(int boxPosition)
+    {
+    return BoxPosition[boxPosition];
     }
 }
+
+
