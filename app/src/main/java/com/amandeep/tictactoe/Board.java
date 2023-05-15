@@ -1,9 +1,11 @@
 package com.amandeep.tictactoe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,18 +18,22 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
 
     String turn="X";
     boolean[] BoxPosition={true,true,true,true,true,true,true,true,true};
-    final int[][] WinPosition={{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
+
     ImageView first,second,third,fourth,fifth,sixth,seventh,eighth,ninth;
     int boxSelectCount=0;
     String[] board=new String[9];
-    int boardindex=0;
     String Winner=null;
+    LinearLayout xlayout,Olayout;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
+
+        xlayout=findViewById(R.id.xlayout);
+        Olayout=findViewById(R.id.Olayout);
+
 
         first=findViewById(R.id.first);
         second=findViewById(R.id.second);
@@ -57,7 +63,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
            if(BoxPosition[0])
            {
-            startAction((ImageView) img,0,turn,board,boardindex);
+            startAction((ImageView) img,0,turn,board);
            }
            else {
                Toast.makeText(this,"Choose AnotherBox",Toast.LENGTH_SHORT).show();
@@ -67,7 +73,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[1])
             {
-                startAction((ImageView) img,1,turn,board,boardindex);
+                startAction((ImageView) img,1,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -77,7 +83,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[2])
             {
-                startAction((ImageView) img,2,turn,board,boardindex);
+                startAction((ImageView) img,2,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -87,7 +93,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[3])
             {
-                startAction((ImageView) img,3,turn,board,boardindex);
+                startAction((ImageView) img,3,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -97,7 +103,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[4])
             {
-                startAction((ImageView) img,4,turn,board,boardindex);
+                startAction((ImageView) img,4,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -107,7 +113,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[5])
             {
-                startAction((ImageView) img,5,turn,board,boardindex);
+                startAction((ImageView) img,5,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -117,7 +123,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[6])
             {
-                startAction((ImageView) img,6,turn,board,boardindex);
+                startAction((ImageView) img,6,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -127,7 +133,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[7])
             {
-                startAction((ImageView) img,7,turn,board,boardindex);
+                startAction((ImageView) img,7,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -137,7 +143,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         {
             if(BoxPosition[8])
             {
-                startAction((ImageView) img,8,turn,board,boardindex);
+                startAction((ImageView) img,8,turn,board);
             }
             else {
                 Toast.makeText(this,"Choose Another Box",Toast.LENGTH_SHORT).show();
@@ -145,12 +151,11 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
-    public void startAction(ImageView view,int index,String currentPlayerTurn,String[] boardArray,int boradIndex) {
+    public void startAction(ImageView view,int index,String currentPlayerTurn,String[] boardArray) {
         turn = currentPlayerTurn;
          if (BoxPosition[index] && turn.equals("X")) {
              view.setImageResource(cross);
-             boardArray[index]=turn;
-                boardindex++;
+                boardArray[index]=turn;
                 boxSelectCount++;
                 Winner=checkWinner();
                 if(Winner!=null)
@@ -159,7 +164,8 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
                 }
                 else if(boxSelectCount==9)
                 {
-                    Toast.makeText(this,"Game Drwa",Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(this, ResultDialog.class);
+                    startActivity(intent);
                 }
 
 
@@ -171,7 +177,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
             else if (BoxPosition[index] && turn.equals("O")) {
                 view.setImageResource(zero);
                 boardArray[index]=turn;
-                boardindex++;
+
                 boxSelectCount++;
              Winner=checkWinner();
              if(Winner!=null)
@@ -199,10 +205,14 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         if(currentTurn.equals("X"))
         {
             turn="O";
+            Olayout.setBackgroundResource(R.drawable.black_border);
+            xlayout.setBackgroundResource(R.color.white);
         }
         else
         {
             turn="X";
+            xlayout.setBackgroundResource(R.drawable.black_border);
+            Olayout.setBackgroundResource(R.color.white);
         }
     }
 
