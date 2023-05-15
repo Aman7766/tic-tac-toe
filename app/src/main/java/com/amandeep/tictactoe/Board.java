@@ -162,7 +162,9 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
                 Winner=checkWinner();
                 if(Winner!=null)
                 {
-                    Toast.makeText(this,"+" +turn+" Winner ",Toast.LENGTH_SHORT).show();
+                    ResultDialog dialog=new ResultDialog(this,"Player X is Winner",Board.this);
+                    dialog.setCancelable(false);
+                    dialog.show();
                 }
                 else if(boxSelectCount==9)
                 {
@@ -170,8 +172,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
                     ResultDialog dialog=new ResultDialog(this,"Match Draw",Board.this);
                     dialog.setCancelable(false);
                     dialog.show();
-//                    Intent intent=new Intent(this, ResultDialog.class);
-//                    startActivity(intent);
+
                 }
 
 
@@ -184,15 +185,20 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
                 view.setImageResource(zero);
                 boardArray[index]=turn;
 
+
                 boxSelectCount++;
              Winner=checkWinner();
              if(Winner!=null)
              {
-                 Toast.makeText(this,"+" +turn+" Winner ",Toast.LENGTH_SHORT).show();
+                 ResultDialog dialog=new ResultDialog(this,"Player O is Winner",Board.this);
+                 dialog.setCancelable(false);
+                 dialog.show();
              }
                else if(boxSelectCount==9)
                {
-                 Toast.makeText(this,"Game Drwa",Toast.LENGTH_SHORT).show();
+                   ResultDialog dialog=new ResultDialog(this,"Match Draw",Board.this);
+                   dialog.setCancelable(false);
+                   dialog.show();
                }
 
 
@@ -270,6 +276,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
     {
         turn="X";
         boxSelectCount=0;
+        Arrays.fill(board,"z");
         Arrays.fill(BoxPosition, true);
         first.setImageResource(R.color.white);
         second.setImageResource(R.color.white);
@@ -280,7 +287,8 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
         seventh.setImageResource(R.color.white);
         eighth.setImageResource(R.color.white);
         ninth.setImageResource(R.color.white);
-
+        xlayout.setBackgroundResource(R.drawable.black_border);
+        Olayout.setBackgroundResource(R.drawable.black_border);
 
 
     }
