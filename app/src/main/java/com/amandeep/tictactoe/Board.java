@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 public class Board extends AppCompatActivity implements View.OnClickListener {
 
     int cross=R.drawable.mu;
@@ -164,8 +166,12 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
                 }
                 else if(boxSelectCount==9)
                 {
-                    Intent intent=new Intent(this, ResultDialog.class);
-                    startActivity(intent);
+
+                    ResultDialog dialog=new ResultDialog(this,"Match Draw",Board.this);
+                    dialog.setCancelable(false);
+                    dialog.show();
+//                    Intent intent=new Intent(this, ResultDialog.class);
+//                    startActivity(intent);
                 }
 
 
@@ -258,6 +264,25 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
 
 
         return null;
+    }
+
+    void restartMatch()
+    {
+        turn="X";
+        boxSelectCount=0;
+        Arrays.fill(BoxPosition, true);
+        first.setImageResource(R.color.white);
+        second.setImageResource(R.color.white);
+        third.setImageResource(R.color.white);
+        fourth.setImageResource(R.color.white);
+        fifth.setImageResource(R.color.white);
+        sixth.setImageResource(R.color.white);
+        seventh.setImageResource(R.color.white);
+        eighth.setImageResource(R.color.white);
+        ninth.setImageResource(R.color.white);
+
+
+
     }
 }
 
