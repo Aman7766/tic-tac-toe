@@ -94,7 +94,7 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/mu"
+
                 android:id="@+id/fifth"
                 android:tag="5"
                 >
@@ -108,7 +108,7 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/mu"
+
                 android:id="@+id/sixth"
                 android:tag="6"
                 >
@@ -131,7 +131,7 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/mu"
+
                 android:id="@+id/seven"
                 android:tag="7"
                 >
@@ -147,7 +147,7 @@
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/mu"
+
                 android:id="@+id/eight"
                 android:tag="8"
                 >
@@ -163,7 +163,7 @@
                 android:id="@+id/nine"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/mu"
+
                 android:tag="9">
 
             </ImageView>
