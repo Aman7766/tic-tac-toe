@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
 
     int cross=R.drawable.mu;
     int zero=R.drawable.zero;
+    TextView playone,playtwo;
 
     String turn="X";
     boolean[] BoxPosition={true,true,true,true,true,true,true,true,true};
@@ -26,12 +28,22 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
     String[] board=new String[9];
     String Winner=null;
     LinearLayout xlayout,Olayout;
+    String Po,Pt;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
+        playone=findViewById(R.id.playefirst);
+        playtwo=findViewById(R.id.playetwo);
+
+        Intent intent=getIntent();
+      Po=intent.getStringExtra("playeone");
+         Pt=intent.getStringExtra("playetwo");
+        playone.setText(Po);
+
+         playtwo.setText(Pt);
 
         xlayout=findViewById(R.id.xlayout);
         Olayout=findViewById(R.id.Olayout);
@@ -162,7 +174,8 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
                 Winner=checkWinner();
                 if(Winner!=null)
                 {
-                    ResultDialog dialog=new ResultDialog(this,"Player X is Winner",Board.this);
+
+                    ResultDialog dialog=new ResultDialog(this,Po + " is Winner",Board.this);
                     dialog.setCancelable(false);
                     dialog.show();
                 }
@@ -190,7 +203,7 @@ public class Board extends AppCompatActivity implements View.OnClickListener {
              Winner=checkWinner();
              if(Winner!=null)
              {
-                 ResultDialog dialog=new ResultDialog(this,"Player O is Winner",Board.this);
+                 ResultDialog dialog=new ResultDialog(this,Pt + " is Winner",Board.this);
                  dialog.setCancelable(false);
                  dialog.show();
              }
